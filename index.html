@@ -1178,6 +1178,185 @@ body {
 .tutorial-tag.crochet { background: var(--badge-croc-bg); color: var(--badge-croc-c); border-color: var(--rose-deep); }
 .tutorial-tag.general { background: var(--cosmic-soft); color: var(--cosmic); border-color: var(--cosmic); }
 
+/* =====================================================
+   ADD ENTRY MODAL & ACTION BUTTONS
+   ===================================================== */
+.add-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 11px 20px;
+  border: 2px solid var(--rose-deep);
+  background: var(--rose-deep);
+  color: white;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  border-radius: 2px;
+  transition: all 0.15s;
+  margin-bottom: 20px;
+  margin-right: 10px;
+}
+.add-btn:hover { background: var(--cosmic); border-color: var(--cosmic); transform: translate(-1px,-1px); box-shadow: 3px 3px 0 rgba(0,0,0,0.3); }
+
+.export-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 11px 20px;
+  border: 2px solid var(--border-main);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  border-radius: 2px;
+  transition: all 0.15s;
+  margin-bottom: 20px;
+}
+.export-btn:hover { border-color: var(--gold); color: var(--gold); transform: translate(-1px,-1px); box-shadow: 3px 3px 0 rgba(0,0,0,0.3); }
+
+.delete-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  padding: 4px 8px;
+  border: 1.5px solid rgba(255,80,80,0.4);
+  background: transparent;
+  color: rgba(255,80,80,0.6);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.15s;
+  margin-top: 8px;
+  display: block;
+}
+.delete-btn:hover { background: rgba(255,80,80,0.1); color: #ff5050; border-color: #ff5050; }
+
+/* Modal overlay */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--bg-card);
+  border: 2px solid var(--border-accent);
+  border-radius: 4px;
+  box-shadow: var(--shadow-glow);
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-head {
+  padding: 18px 20px;
+  border-bottom: 2px solid var(--border-main);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card-alt);
+}
+
+.modal-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+
+.modal-close {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 8px;
+  transition: color 0.2s;
+}
+.modal-close:hover { color: var(--rose); }
+
+.modal-body { padding: 20px; }
+
+.modal-field { margin-bottom: 16px; }
+
+.modal-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.modal-input, .modal-select, .modal-textarea {
+  width: 100%;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  padding: 9px 12px;
+  background: var(--input-bg);
+  border: 2px solid var(--border-main);
+  color: var(--text-primary);
+  outline: none;
+  border-radius: 2px;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+.modal-input:focus, .modal-select:focus, .modal-textarea:focus { border-color: var(--cosmic); }
+.modal-textarea { resize: vertical; min-height: 80px; }
+
+.modal-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.modal-save {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 12px 24px;
+  border: 2px solid var(--rose-deep);
+  background: var(--rose-deep);
+  color: white;
+  cursor: pointer;
+  border-radius: 2px;
+  width: 100%;
+  margin-top: 8px;
+  transition: all 0.15s;
+  letter-spacing: 0.5px;
+}
+.modal-save:hover { background: var(--cosmic); border-color: var(--cosmic); }
+
+/* Export modal */
+.export-textarea {
+  width: 100%;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  padding: 12px;
+  background: var(--bg-base);
+  border: 2px solid var(--border-main);
+  color: var(--text-primary);
+  border-radius: 2px;
+  resize: none;
+  height: 300px;
+  box-sizing: border-box;
+}
+
+.copy-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 11px 20px;
+  border: 2px solid var(--cosmic);
+  background: var(--cosmic);
+  color: white;
+  cursor: pointer;
+  border-radius: 2px;
+  width: 100%;
+  margin-top: 10px;
+  transition: all 0.15s;
+}
+.copy-btn:hover { background: var(--rose-deep); border-color: var(--rose-deep); }
+
 ::-webkit-scrollbar { width:6px; height:6px; }
 ::-webkit-scrollbar-track { background:var(--bg-base); }
 ::-webkit-scrollbar-thumb { background:var(--border-accent); }
@@ -1413,7 +1592,7 @@ body {
       </div>
       <div class="crystal-card">
         <span class="crystal-icon">🧶</span>
-        <span class="crystal-num">20</span>
+        <span class="crystal-num">40</span>
         <span class="crystal-label">STASH</span>
       </div>
     </div>
@@ -1498,6 +1677,11 @@ body {
       <button class="search-btn">SEARCH</button>
     </div>
 
+    <div style="display:flex;flex-wrap:wrap;align-items:center;">
+      <button class="add-btn" onclick="openModal('project')">+ ADD PROJECT</button>
+      <button class="export-btn" onclick="openExport('project')">↓ EXPORT CODE</button>
+    </div>
+
     <div class="filter-row">
       <button class="filter-btn active" onclick="setFilter('all',this)">ALL</button>
       <button class="filter-btn-moon" onclick="setFilter('knit',this)">KNIT</button>
@@ -1556,6 +1740,11 @@ body {
       <button class="search-btn">SEARCH</button>
     </div>
 
+    <div style="display:flex;flex-wrap:wrap;align-items:center;">
+      <button class="add-btn" onclick="openModal('pattern')">+ ADD PATTERN</button>
+      <button class="export-btn" onclick="openExport('pattern')">↓ EXPORT CODE</button>
+    </div>
+
     <div class="pattern-list-card">
       <div class="pattern-list-head">✦ PATTERNS REFERENCED IN PROJECTS</div>
       <div class="pattern-list-cols" id="pattern-list"></div>
@@ -1588,6 +1777,10 @@ body {
         <span class="cat-name">MIMI</span>
         <span class="cat-speech">"Every skein, every gram — I know what's in the stash. Do NOT buy more yarn. (She lies.)"</span>
       </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;">
+      <button class="add-btn" onclick="openModal('stash')">+ ADD YARN</button>
+      <button class="export-btn" onclick="openExport('stash')">↓ EXPORT CODE</button>
     </div>
     <div class="stash-wrap">
       <div class="stash-scroll">
@@ -2011,6 +2204,11 @@ body {
       <button class="search-btn">SEARCH</button>
     </div>
 
+    <div style="display:flex;flex-wrap:wrap;align-items:center;">
+      <button class="add-btn" onclick="openModal('tutorial')">+ ADD TUTORIAL</button>
+      <button class="export-btn" onclick="openExport('tutorial')">↓ EXPORT CODE</button>
+    </div>
+
     <div class="tutorials-grid" id="tutorials-grid"></div>
   </div>
 
@@ -2021,6 +2219,344 @@ body {
       sabacyr.github.io
     </a>
   </footer>
+</div>
+
+<!-- =====================================================
+     MODALS
+     ===================================================== -->
+
+<!-- Add Pattern Modal -->
+<div class="modal-overlay" id="modal-pattern">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">+ ADD PATTERN</span>
+      <button class="modal-close" onclick="closeModal('pattern')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-field">
+        <label class="modal-label">PATTERN NAME</label>
+        <input class="modal-input" id="pat-name" placeholder="e.g. Nimble Needles - Toe Up Socks">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">PDF LINK (optional)</label>
+        <input class="modal-input" id="pat-url" placeholder="e.g. Knit/pattern-name.pdf">
+      </div>
+      <button class="modal-save" onclick="savePattern()">SAVE PATTERN ▶</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Project Modal -->
+<div class="modal-overlay" id="modal-edit-project">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">EDIT PROJECT</span>
+      <button class="modal-close" onclick="closeModal('edit-project')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="ep-idx">
+      <div class="modal-field">
+        <label class="modal-label">PROJECT NAME</label>
+        <input class="modal-input" id="ep-name">
+      </div>
+      <div class="modal-row">
+        <div class="modal-field">
+          <label class="modal-label">CRAFT</label>
+          <select class="modal-select" id="ep-craft">
+            <option value="knit">Knit</option>
+            <option value="crochet">Crochet</option>
+          </select>
+        </div>
+        <div class="modal-field">
+          <label class="modal-label">STATUS</label>
+          <select class="modal-select" id="ep-status">
+            <option value="finished">Finished</option>
+            <option value="wip">WIP</option>
+            <option value="future">Future / Queued</option>
+            <option value="frogged">Frogged</option>
+            <option value="trashed">Trashed</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">PATTERN</label>
+        <input class="modal-input" id="ep-pattern">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">YARN</label>
+        <input class="modal-input" id="ep-yarn">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">RATING (1–5)</label>
+        <input class="modal-input" id="ep-rating" type="number" min="0" max="5">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">NOTES</label>
+        <textarea class="modal-textarea" id="ep-notes"></textarea>
+      </div>
+      <button class="modal-save" onclick="updateProject()">SAVE CHANGES ▶</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Yarn Modal -->
+<div class="modal-overlay" id="modal-edit-stash">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">EDIT YARN</span>
+      <button class="modal-close" onclick="closeModal('edit-stash')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="ey-idx">
+      <div class="modal-row">
+        <div class="modal-field">
+          <label class="modal-label">BRAND</label>
+          <input class="modal-input" id="ey-brand">
+        </div>
+        <div class="modal-field">
+          <label class="modal-label">YARN NAME</label>
+          <input class="modal-input" id="ey-name">
+        </div>
+      </div>
+      <div class="modal-row">
+        <div class="modal-field">
+          <label class="modal-label">COLORWAY</label>
+          <input class="modal-input" id="ey-colorway">
+        </div>
+        <div class="modal-field">
+          <label class="modal-label">COLOUR</label>
+          <input class="modal-input" id="ey-color" type="color" style="padding:4px;height:42px;cursor:pointer;">
+        </div>
+      </div>
+      <div class="modal-row">
+        <div class="modal-field">
+          <label class="modal-label">YARDAGE / GRAMS</label>
+          <input class="modal-input" id="ey-yardage">
+        </div>
+        <div class="modal-field">
+          <label class="modal-label">WEIGHT</label>
+          <select class="modal-select" id="ey-weight">
+            <option>Lace (0)</option><option>Fingering (1)</option><option>Sport (2)</option>
+            <option>DK (3)</option><option>Worsted (4)</option><option>Bulky (5)</option><option>Super Bulky (6)</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-row">
+        <div class="modal-field">
+          <label class="modal-label">FIBER</label>
+          <input class="modal-input" id="ey-fiber">
+        </div>
+        <div class="modal-field">
+          <label class="modal-label">SKEINS</label>
+          <input class="modal-input" id="ey-skeins">
+        </div>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">STORE</label>
+        <input class="modal-input" id="ey-store">
+      </div>
+      <button class="modal-save" onclick="updateYarn()">SAVE CHANGES ▶</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Tutorial Modal -->
+<div class="modal-overlay" id="modal-edit-tutorial">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">EDIT TUTORIAL</span>
+      <button class="modal-close" onclick="closeModal('edit-tutorial')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="et-idx">
+      <div class="modal-field">
+        <label class="modal-label">VIDEO TITLE</label>
+        <input class="modal-input" id="et-title">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">CREATOR</label>
+        <input class="modal-input" id="et-creator">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">URL</label>
+        <input class="modal-input" id="et-url">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">TAG</label>
+        <select class="modal-select" id="et-tag">
+          <option value="knit">Knit</option>
+          <option value="crochet">Crochet</option>
+          <option value="general">General</option>
+        </select>
+      </div>
+      <button class="modal-save" onclick="updateTutorial()">SAVE CHANGES ▶</button>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-project">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">+ ADD PROJECT</span>
+      <button class="modal-close" onclick="closeModal('project')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-field">
+        <label class="modal-label">PROJECT NAME</label>
+        <input class="modal-input" id="p-name" placeholder="e.g. Bear Socks">
+      </div>
+      <div class="modal-row">
+        <div class="modal-field">
+          <label class="modal-label">CRAFT</label>
+          <select class="modal-select" id="p-craft">
+            <option value="knit">Knit</option>
+            <option value="crochet">Crochet</option>
+          </select>
+        </div>
+        <div class="modal-field">
+          <label class="modal-label">STATUS</label>
+          <select class="modal-select" id="p-status">
+            <option value="finished">Finished</option>
+            <option value="wip">WIP</option>
+            <option value="future">Future / Queued</option>
+            <option value="frogged">Frogged</option>
+            <option value="trashed">Trashed</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">PATTERN</label>
+        <input class="modal-input" id="p-pattern" placeholder="e.g. Nimble Needles - Toe Up Socks">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">YARN</label>
+        <input class="modal-input" id="p-yarn" placeholder="e.g. Cascade Eco Duo">
+      </div>
+      <div class="modal-row">
+        <div class="modal-field">
+          <label class="modal-label">RATING (1–5)</label>
+          <input class="modal-input" id="p-rating" type="number" min="0" max="5" placeholder="5">
+        </div>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">NOTES</label>
+        <textarea class="modal-textarea" id="p-notes" placeholder="Any thoughts on this project…"></textarea>
+      </div>
+      <button class="modal-save" onclick="saveProject()">SAVE PROJECT ▶</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Yarn Modal -->
+<div class="modal-overlay" id="modal-stash">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">+ ADD YARN</span>
+      <button class="modal-close" onclick="closeModal('stash')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-row">
+        <div class="modal-field">
+          <label class="modal-label">BRAND</label>
+          <input class="modal-input" id="y-brand" placeholder="e.g. Cascade">
+        </div>
+        <div class="modal-field">
+          <label class="modal-label">YARN NAME</label>
+          <input class="modal-input" id="y-name" placeholder="e.g. Eco Duo">
+        </div>
+      </div>
+      <div class="modal-row">
+        <div class="modal-field">
+          <label class="modal-label">COLORWAY</label>
+          <input class="modal-input" id="y-colorway" placeholder="e.g. Chinchilla">
+        </div>
+        <div class="modal-field">
+          <label class="modal-label">COLOUR (hex)</label>
+          <input class="modal-input" id="y-color" type="color" value="#C0B0A0" style="padding:4px;height:42px;cursor:pointer;">
+        </div>
+      </div>
+      <div class="modal-row">
+        <div class="modal-field">
+          <label class="modal-label">YARDAGE / GRAMS</label>
+          <input class="modal-input" id="y-yardage" placeholder="e.g. 197/100">
+        </div>
+        <div class="modal-field">
+          <label class="modal-label">WEIGHT</label>
+          <select class="modal-select" id="y-weight">
+            <option>Lace (0)</option>
+            <option>Fingering (1)</option>
+            <option>Sport (2)</option>
+            <option>DK (3)</option>
+            <option selected>Worsted (4)</option>
+            <option>Bulky (5)</option>
+            <option>Super Bulky (6)</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-row">
+        <div class="modal-field">
+          <label class="modal-label">FIBER</label>
+          <input class="modal-input" id="y-fiber" placeholder="e.g. Alpaca + M Wool">
+        </div>
+        <div class="modal-field">
+          <label class="modal-label">SKEINS (have/total)</label>
+          <input class="modal-input" id="y-skeins" placeholder="e.g. 0/6">
+        </div>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">STORE</label>
+        <input class="modal-input" id="y-store" placeholder="e.g. Knit Picks">
+      </div>
+      <button class="modal-save" onclick="saveYarn()">SAVE YARN ▶</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Tutorial Modal -->
+<div class="modal-overlay" id="modal-tutorial">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">+ ADD TUTORIAL</span>
+      <button class="modal-close" onclick="closeModal('tutorial')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-field">
+        <label class="modal-label">VIDEO TITLE</label>
+        <input class="modal-input" id="t-title" placeholder="e.g. How to Knit Toe-Up Socks">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">CREATOR / CHANNEL</label>
+        <input class="modal-input" id="t-creator" placeholder="e.g. Nimble Needles">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">YOUTUBE URL</label>
+        <input class="modal-input" id="t-url" placeholder="https://www.youtube.com/watch?v=...">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">TAG</label>
+        <select class="modal-select" id="t-tag">
+          <option value="knit">Knit</option>
+          <option value="crochet">Crochet</option>
+          <option value="general">General</option>
+        </select>
+      </div>
+      <button class="modal-save" onclick="saveTutorial()">SAVE TUTORIAL ▶</button>
+    </div>
+  </div>
+</div>
+
+<!-- Export Modal -->
+<div class="modal-overlay" id="modal-export">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title" id="export-title">EXPORT CODE</span>
+      <button class="modal-close" onclick="closeModal('export')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--text-secondary);margin-bottom:14px;line-height:1.6;">Copy this and paste it into your <code style="font-size:13px;background:var(--bg-base);padding:2px 6px;">index.html</code> on GitHub, replacing the matching array.</p>
+      <textarea class="export-textarea" id="export-output" readonly></textarea>
+      <button class="copy-btn" onclick="copyExport()">COPY TO CLIPBOARD ▶</button>
+    </div>
+  </div>
 </div>
 
 <!-- =====================================================
@@ -2097,6 +2633,27 @@ const stash = [
   { brand:"Lion Brand", name:"24/7 Cotton", colorway:"Black", yardage:"186/100", weight:"Worsted (4)", fiber:"Cotton", skeins:"1/1", store:"Joann", color:"#222222" },
   { brand:"Joann", name:"Big Twist", colorway:"Sage", yardage:"380/170", weight:"Worsted (4)", fiber:"Acrylic", skeins:"0/2", store:"Joann", color:"#88A878" },
   { brand:"Joann", name:"Big Twist", colorway:"Olive Drab", yardage:"380/170", weight:"Worsted (4)", fiber:"Acrylic", skeins:"0/2", store:"Joann", color:"#7A8840" },
+  { brand:"Joann", name:"Big Twist", colorway:"Rust", yardage:"380/170", weight:"Worsted (4)", fiber:"Acrylic", skeins:"0/2", store:"Joann", color:"#B84A20" },
+  { brand:"Joann", name:"Big Twist", colorway:"Sky Blue", yardage:"380/170", weight:"Worsted (4)", fiber:"Acrylic", skeins:"0/2", store:"Joann", color:"#70A8D0" },
+  { brand:"Joann", name:"Big Twist", colorway:"Denim Blue", yardage:"380/170", weight:"Worsted (4)", fiber:"Acrylic", skeins:"0/2", store:"Joann", color:"#3A5A80" },
+  { brand:"Joann", name:"Big Twist", colorway:"Grape", yardage:"380/170", weight:"Worsted (4)", fiber:"Acrylic", skeins:"0/2", store:"Joann", color:"#6A3080" },
+  { brand:"Joann", name:"Big Twist", colorway:"Coral", yardage:"380/170", weight:"Worsted (4)", fiber:"Acrylic", skeins:"0/2", store:"Joann", color:"#E87060" },
+  { brand:"Joann", name:"Big Twist", colorway:"Varsity Gold", yardage:"380/170", weight:"Worsted (4)", fiber:"Acrylic", skeins:"0/2", store:"Joann", color:"#D4A020" },
+  { brand:"Joann", name:"Big Twist", colorway:"Varsity Red", yardage:"380/170", weight:"Worsted (4)", fiber:"Acrylic", skeins:"0/2", store:"Joann", color:"#C02020" },
+  { brand:"Joann", name:"Big Twist", colorway:"Eggplant", yardage:"380/170", weight:"Worsted (4)", fiber:"Acrylic", skeins:"0/2", store:"Joann", color:"#4A1A5A" },
+  { brand:"Lion Brand", name:"Wool Ease Thick & Quick", colorway:"Coney Island", yardage:"87/140", weight:"Super Bulky (6)", fiber:"Acrylic + Wool", skeins:"0/17", store:"Joann", color:"#D0B090" },
+  { brand:"Lion Brand", name:"Wool Ease Thick & Quick", colorway:"Hudson Bay", yardage:"87/140", weight:"Super Bulky (6)", fiber:"Acrylic + Wool", skeins:"0/5", store:"Joann", color:"#8090A0" },
+  { brand:"Lion Brand", name:"Heartland", colorway:"Kings Canyon", yardage:"251/142", weight:"Worsted (4)", fiber:"Acrylic", skeins:"0/3", store:"Michaels", color:"#5A7060" },
+  { brand:"Yarn Bee", name:"Macrame Cord", colorway:"Light Grey", yardage:"82/250", weight:"Bulky (5)", fiber:"Acrylic Cotton", skeins:"0/2", store:"Hobby Lobby", color:"#C8C8C0" },
+  { brand:"Yarn Bee", name:"Macrame Cord", colorway:"Blue", yardage:"82/250", weight:"Bulky (5)", fiber:"Acrylic Cotton", skeins:"0/2", store:"Hobby Lobby", color:"#4060A0" },
+  { brand:"Yarn Bee", name:"Macrame Cord", colorway:"White", yardage:"82/250", weight:"Bulky (5)", fiber:"Acrylic Cotton", skeins:"0/2", store:"Hobby Lobby", color:"#F0F0F0" },
+  { brand:"Multi", name:"Scrap Yarn", colorway:"Scrap Yarn", yardage:"-", weight:"Worsted (4)", fiber:"Multi", skeins:"0/2", store:"Multi", color:"#D090C0" },
+  { brand:"Lion Brand", name:"Basic Stitch", colorway:"Gold Heather", yardage:"185/100", weight:"Worsted (4)", fiber:"Acrylic", skeins:"0/2", store:"Michaels", color:"#C8A040" },
+  { brand:"Lion Brand", name:"Wool Ease Thick & Quick", colorway:"Fossil", yardage:"87/140", weight:"Super Bulky (6)", fiber:"Acrylic + Wool", skeins:"0/6", store:"Joann", color:"#A0A898" },
+  { brand:"Lion Brand", name:"Wool Ease Thick & Quick", colorway:"Marsh", yardage:"87/140", weight:"Super Bulky (6)", fiber:"Acrylic + Wool", skeins:"0/4", store:"Joann", color:"#607860" },
+  { brand:"Knit Wit", name:"Doubling Point Light", colorway:"Maine Sunset", yardage:"231/100", weight:"DK (3)", fiber:"SWM Wool", skeins:"0/2", store:"Knit Wit", color:"#E89060" },
+  { brand:"Lion Brand", name:"Wool Ease", colorway:"Natural Heather", yardage:"197/85", weight:"Worsted (4)", fiber:"Acrylic + Wool", skeins:"0/6", store:"Lion Brand", color:"#D8CEB8" },
+  { brand:"Loops & Threads", name:"Skyscape", colorway:"Blue & Cream", yardage:"262/100", weight:"Worsted (4)", fiber:"Acrylic + Nylon", skeins:"6/6", store:"Michaels", color:"#A8C0D8" },
 ];
 
 /* Add your finished object photos here! */
@@ -2110,30 +2667,32 @@ const galleryPhotos = [
 /* ===== TUTORIALS =====
    To edit: update the title, creator, and tag fields below.
    Tags: "knit", "crochet", or "general"
-   Leave the url as-is — those are your links!
    ===================================================== */
 const tutorials = [
-  { title:"Knit 2 Sleeves At a Time",  creator:"M", tag:"knit",    url:"https://youtu.be/G_owwFURzKk?si=KqaUwOW2CTZLKQ6C" },
-  { title:"How To Line A Beanie",  creator:"Iris Handmade Art", tag:"knit",    url:"https://youtu.be/E0utRHmosMs?si=QSQfhlH2a2Ej-xnQ" },
-  { title:"Knitted Cast On",  creator:"Stephen West", tag:"knit",    url:"https://youtu.be/r4dFSamX3Ok?si=3ROpbU1wws0zGP_m" },
-  { title:"How To Knit Ribbing Neater",  creator:"NimbleNeedles", tag:"knit",    url:"https://youtu.be/6gxm_Nyq0O4?si=5cNDbO9rCUU5sQGo" },
-  { title:"Neater SSK",  creator:"10 Rows a Day", tag:"knit",    url:"https://youtu.be/lDtjRE8_WT8?si=Xunf08wBe0lC2B1O" },
-  { title:"Neater K2Tog",  creator:"10 Rows a Day", tag:"knit",    url:"https://youtu.be/kOft9oe74x8?si=xvco9NAjtnWpL3hE" },
-  { title:"How To Knit a Hat",  creator:"NimbleNeedles", tag:"knit",    url:"https://youtu.be/9P75nmvrMNI?si=YKj-LSdUc2pLVhWT" },
-  { title:"How To Knit Toe Up Socks",  creator:"NimbleNeedles", tag:"knit",    url:"https://youtu.be/PxiCUqujZnY?si=OEfDd2kVlRxe8FVH" },
-  { title:"How To Knit Gloves",  creator:"NimbleNeedles", tag:"knit",    url:"https://youtu.be/jDmB0VFZq_g?si=IvSlvjSggnqhJxOD" },
-  { title:"How To Knit Raglan Sweater", creator:"Ashley Lillies", tag:"knit",    url:"https://youtu.be/aLtDaN2OTig?si=5SVjpkkZWSffYNiE" },
+  { title:"Knit 2 Sleeves At a Time", creator:"M", tag:"knit", url:"https://youtu.be/G_owwFURzKk?si=KqaUwOW2CTZLKQ6C" },
+  { title:"How To Line A Beanie", creator:"Iris Handmade Art", tag:"knit", url:"https://youtu.be/E0utRHmosMs?si=QSQfhlH2a2Ej-xnQ" },
+  { title:"Knitted Cast On", creator:"Stephen West", tag:"knit", url:"https://youtu.be/r4dFSamX3Ok?si=3ROpbU1wws0zGP_m" },
+  { title:"How To Knit Ribbing Neater", creator:"NimbleNeedles", tag:"knit", url:"https://youtu.be/6gxm_Nyq0O4?si=5cNDbO9rCUU5sQGo" },
+  { title:"Neater SSK", creator:"10 Rows a Day", tag:"knit", url:"https://youtu.be/lDtjRE8_WT8?si=Xunf08wBe0lC2B1O" },
+  { title:"Neater K2Tog", creator:"10 Rows a Day", tag:"knit", url:"https://youtu.be/kOft9oe74x8?si=xvco9NAjtnWpL3hE" },
+  { title:"How To Knit a Hat", creator:"NimbleNeedles", tag:"knit", url:"https://youtu.be/9P75nmvrMNI?si=YKj-LSdUc2pLVhWT" },
+  { title:"How To Knit Toe Up Socks", creator:"NimbleNeedles", tag:"knit", url:"https://youtu.be/PxiCUqujZnY?si=OEfDd2kVlRxe8FVH" },
+  { title:"How To Knit Gloves", creator:"NimbleNeedles", tag:"knit", url:"https://youtu.be/jDmB0VFZq_g?si=IvSlvjSggnqhJxOD" },
+  { title:"How To Knit Raglan Sweater", creator:"Ashley Lillies", tag:"knit", url:"https://youtu.be/aLtDaN2OTig?si=5SVjpkkZWSffYNiE" },
 ];
 
 function getYouTubeId(url) {
-  const m = url.match(/[?&]v=([^&]+)/);
-  return m ? m[1] : null;
+  const long = url.match(/[?&]v=([^&]+)/);
+  if (long) return long[1];
+  const short = url.match(/youtu\.be\/([^?&]+)/);
+  if (short) return short[1];
+  return null;
 }
 
 function renderTutorials() {
   const q = (document.getElementById('tutorialSearch')?.value || '').toLowerCase();
   const grid = document.getElementById('tutorials-grid');
-  const list = tutorials.filter(t => !q || t.title.toLowerCase().includes(q) || t.creator.toLowerCase().includes(q) || t.tag.includes(q));
+  const list = allTutorials.map((t,i)=>({...t,_idx:i})).filter(t => !q || t.title.toLowerCase().includes(q) || t.creator.toLowerCase().includes(q) || t.tag.includes(q));
   if (!list.length) {
     grid.innerHTML = `<div class="empty-state">NO TUTORIALS FOUND ✦</div>`;
     return;
@@ -2141,15 +2700,21 @@ function renderTutorials() {
   grid.innerHTML = list.map(t => {
     const vid = getYouTubeId(t.url);
     const thumb = vid ? `<img class="tutorial-thumb" src="https://img.youtube.com/vi/${vid}/mqdefault.jpg" alt="${t.title}" loading="lazy">` : `<div class="tutorial-thumb-placeholder">🎬</div>`;
+    const lsIdx = (t._local && !('_override' in t)) ? lsTutorials.findIndex(lt => lt === allTutorials[t._idx]) : -1;
+    const delBtn = lsIdx >= 0 ? `<button class="delete-btn" onclick="event.preventDefault();deleteTutorial(${lsIdx})">✕ REMOVE</button>` : '';
     return `
-      <a class="tutorial-card" href="${t.url}" target="_blank" rel="noopener">
-        ${thumb}
+      <div class="tutorial-card" style="cursor:default;">
+        <a href="${t.url}" target="_blank" rel="noopener" style="display:block;text-decoration:none;">${thumb}</a>
         <div class="tutorial-info">
           <span class="tutorial-title">${t.title}</span>
           <span class="tutorial-creator">${t.creator}</span>
           <span class="tutorial-tag ${t.tag}">${t.tag.toUpperCase()}</span>
+          <div style="display:flex;gap:6px;margin-top:8px;">
+            <button class="delete-btn" style="margin:0;" onclick="openEditTutorial(${t._idx})">✏️ EDIT</button>
+            ${delBtn}
+          </div>
         </div>
-      </a>`;
+      </div>`;
   }).join('');
 }
 
@@ -2216,7 +2781,7 @@ function statusLabel(s) {
 function renderProjects() {
   const grid = document.getElementById('projects-grid');
   const q = (document.getElementById('search')||{}).value?.toLowerCase()||'';
-  const list = projects.filter(p => {
+  const list = allProjects.map((p, i) => ({...p, _idx: i})).filter(p => {
     if (p.status==='future') return false;
     const mf = currentFilter==='all'||p.craft===currentFilter||p.status===currentFilter;
     const ms = !q||[p.name,p.pattern,p.yarn,p.notes].join(' ').toLowerCase().includes(q);
@@ -2226,7 +2791,10 @@ function renderProjects() {
     grid.innerHTML=`<div class="empty-state">NO PROJECTS FOUND...<br>THE MOON WILL GUIDE YOU ✦</div>`;
     return;
   }
-  grid.innerHTML = list.map(p=>`
+  grid.innerHTML = list.map(p => {
+    const lsIdx = p._local ? lsProjects.findIndex(lp => lp === allProjects[p._idx]) : -1;
+    const delBtn = (p._local && lsIdx >= 0) ? `<button class="delete-btn" onclick="deleteProject(${lsIdx})">✕ REMOVE</button>` : '';
+    return `
     <div class="project-card" data-status="${p.status}">
       <div class="project-card-bar"></div>
       <div class="project-card-head">
@@ -2235,18 +2803,23 @@ function renderProjects() {
       </div>
       <div class="project-card-body">
         <div class="project-meta-row"><span class="meta-key">PATTERN</span>&nbsp;<span style="font-family:Nunito;font-size:13px;color:var(--text-primary)">${p.pattern||'—'}</span></div>
-        <div class="project-meta-row"><span class="meta-key">YARN</span>&nbsp;<span style="font-family:Nunito;font-size:13px;color:var(--text-primary)">${p.yarn}</span></div>
+        <div class="project-meta-row"><span class="meta-key">YARN</span>&nbsp;<span style="font-family:Nunito;font-size:13px;color:var(--text-primary)">${p.yarn||'—'}</span></div>
         <div class="project-footer">
           <span class="status-badge status-${p.status}">${statusLabel(p.status)}</span>
           ${p.rating?`<span class="stars-row">${stars(p.rating)}</span>`:''}
         </div>
         ${p.notes?`<div class="project-notes">${p.notes}</div>`:''}
+        <div style="display:flex;gap:6px;margin-top:8px;">
+          <button class="delete-btn" style="margin:0;" onclick="openEditProject(${p._idx})">✏️ EDIT</button>
+          ${delBtn}
+        </div>
       </div>
-    </div>`).join('');
+    </div>`}).join('');
 }
 
 function renderFuture() {
-  document.getElementById('future-grid').innerHTML = projects
+  document.getElementById('future-grid').innerHTML = allProjects
+    .map((p, i) => ({...p, _idx: i}))
     .filter(p=>p.status==='future')
     .map(p=>`
       <div class="project-card" data-status="future">
@@ -2259,12 +2832,16 @@ function renderFuture() {
           <div class="project-meta-row"><span class="meta-key">PATTERN</span>&nbsp;<span style="font-family:Nunito;font-size:13px;color:var(--text-primary)">${p.pattern||'TBD'}</span></div>
           <div class="project-meta-row"><span class="meta-key">YARN</span>&nbsp;<span style="font-family:Nunito;font-size:13px;color:var(--text-primary)">${p.yarn||'TBD'}</span></div>
           <div class="project-footer"><span class="status-badge status-future">🌟 ON THE QUEST BOARD</span></div>
+          <button class="delete-btn" style="margin-top:8px;" onclick="openEditProject(${p._idx})">✏️ EDIT</button>
         </div>
       </div>`).join('');
 }
 
 function renderStash() {
-  document.getElementById('stash-tbody').innerHTML = stash.map(y=>`
+  document.getElementById('stash-tbody').innerHTML = allStash.map((y, idx)=>{
+    const lsIdx = (y._local && !('_override' in y)) ? lsStash.findIndex(ly => ly === allStash[idx]) : -1;
+    const delCell = lsIdx >= 0 ? `<td><button class="delete-btn" style="margin:0;" onclick="deleteYarn(${lsIdx})">✕</button></td>` : '<td></td>';
+    return `
     <tr>
       <td><strong>${y.brand}</strong></td>
       <td>${y.name}</td>
@@ -2274,17 +2851,22 @@ function renderStash() {
       <td>${y.fiber}</td>
       <td>${y.skeins}</td>
       <td>${y.store}</td>
-    </tr>`).join('');
+      <td><button class="delete-btn" style="margin:0;" onclick="openEditYarn(${idx})">✏️</button></td>
+      ${delCell}
+    </tr>`;
+  }).join('');
 }
 
 function renderPatterns() { filterPatterns(); }
 
 function filterPatterns() {
   const q = (document.getElementById('patternSearch')?.value || '').toLowerCase();
-  const pats = [...new Set(
-    projects.filter(p=>p.pattern&&!p.pattern.toLowerCase().startsWith('my')&&p.pattern!=='TBD'&&p.pattern!=='My own'&&p.pattern!=='15 by 18 inches').map(p=>p.pattern)
-  )].sort().filter(p => !q || p.toLowerCase().includes(q));
-  document.getElementById('pattern-list').innerHTML = pats.map(p=>`<div class="pattern-item">${p}</div>`).join('')
+  const fromProjects = [...new Set(
+    allProjects.filter(p=>p.pattern&&!p.pattern.toLowerCase().startsWith('my')&&p.pattern!=='TBD'&&p.pattern!=='My own'&&p.pattern!=='15 by 18 inches'&&p.pattern!=='—').map(p=>p.pattern)
+  )];
+  const fromLocal = lsPatterns.map(p => p.pattern);
+  const all = [...new Set([...fromProjects, ...fromLocal])].sort().filter(p => !q || p.toLowerCase().includes(q));
+  document.getElementById('pattern-list').innerHTML = all.map(p=>`<div class="pattern-item">${p}</div>`).join('')
     || `<div style="font-family:'Press Start 2P',monospace;font-size:7px;color:var(--text-muted);padding:12px 0;">NO PATTERNS FOUND</div>`;
 }
 
@@ -2553,7 +3135,346 @@ document.addEventListener('mousemove', e => {
   setTimeout(() => el.remove(), 720);
 });
 
-/* ===== INIT ===== */
+/* =====================================================
+   LOCAL STORAGE — load saved entries and merge with defaults
+   ===================================================== */
+function loadLS(key, defaults) {
+  try { const d = localStorage.getItem(key); return d ? JSON.parse(d) : []; } catch { return []; }
+}
+function saveLS(key, data) {
+  try { localStorage.setItem(key, JSON.stringify(data)); } catch {}
+}
+
+/* Merge: defaults first, then localStorage additions */
+const lsProjects  = loadLS('ss_projects');
+const lsStash     = loadLS('ss_stash');
+const lsTutorials = loadLS('ss_tutorials');
+const lsPatterns  = loadLS('ss_patterns');
+
+/* Runtime arrays (defaults + localStorage) */
+let allProjects  = [...projects,  ...lsProjects];
+let allStash     = [...stash,     ...lsStash];
+let allTutorials = [...tutorials, ...lsTutorials];
+
+/* =====================================================
+   MODAL OPEN / CLOSE
+   ===================================================== */
+function openModal(type) {
+  document.getElementById('modal-' + type).classList.add('open');
+}
+function closeModal(type) {
+  document.getElementById('modal-' + type).classList.remove('open');
+}
+
+/* Close on overlay click */
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('modal-overlay')) {
+    e.target.classList.remove('open');
+  }
+});
+
+/* =====================================================
+   SAVE HANDLERS
+   ===================================================== */
+function savePattern() {
+  const name = document.getElementById('pat-name').value.trim();
+  if (!name) { alert('Please enter a pattern name!'); return; }
+  const entry = { pattern: name, url: document.getElementById('pat-url').value.trim(), _local: true };
+  lsPatterns.push(entry);
+  saveLS('ss_patterns', lsPatterns);
+  closeModal('pattern');
+  clearForm(['pat-name','pat-url']);
+  filterPatterns();
+}
+
+function saveProject() {
+  const name = document.getElementById('p-name').value.trim();
+  if (!name) { alert('Please enter a project name!'); return; }
+  const entry = {
+    name,
+    craft:   document.getElementById('p-craft').value,
+    status:  document.getElementById('p-status').value,
+    pattern: document.getElementById('p-pattern').value.trim() || '—',
+    yarn:    document.getElementById('p-yarn').value.trim() || '—',
+    rating:  parseInt(document.getElementById('p-rating').value) || 0,
+    notes:   document.getElementById('p-notes').value.trim(),
+    _local: true
+  };
+  lsProjects.push(entry);
+  saveLS('ss_projects', lsProjects);
+  allProjects = [...projects, ...lsProjects];
+  closeModal('project');
+  clearForm(['p-name','p-pattern','p-yarn','p-rating','p-notes']);
+  renderProjects();
+  renderFuture();
+}
+
+function saveYarn() {
+  const brand = document.getElementById('y-brand').value.trim();
+  if (!brand) { alert('Please enter a brand name!'); return; }
+  const entry = {
+    brand,
+    name:     document.getElementById('y-name').value.trim(),
+    colorway: document.getElementById('y-colorway').value.trim(),
+    color:    document.getElementById('y-color').value,
+    yardage:  document.getElementById('y-yardage').value.trim(),
+    weight:   document.getElementById('y-weight').value,
+    fiber:    document.getElementById('y-fiber').value.trim(),
+    skeins:   document.getElementById('y-skeins').value.trim(),
+    store:    document.getElementById('y-store').value.trim(),
+    _local: true
+  };
+  lsStash.push(entry);
+  saveLS('ss_stash', lsStash);
+  allStash = [...stash, ...lsStash];
+  closeModal('stash');
+  clearForm(['y-brand','y-name','y-colorway','y-yardage','y-fiber','y-skeins','y-store']);
+  renderStash();
+}
+
+function saveTutorial() {
+  const title = document.getElementById('t-title').value.trim();
+  const url   = document.getElementById('t-url').value.trim();
+  if (!title || !url) { alert('Please enter a title and URL!'); return; }
+  const entry = {
+    title,
+    creator: document.getElementById('t-creator').value.trim(),
+    url,
+    tag:     document.getElementById('t-tag').value,
+    _local: true
+  };
+  lsTutorials.push(entry);
+  saveLS('ss_tutorials', lsTutorials);
+  allTutorials = [...tutorials, ...lsTutorials];
+  closeModal('tutorial');
+  clearForm(['t-title','t-creator','t-url']);
+  renderTutorials();
+}
+
+function clearForm(ids) {
+  ids.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+}
+
+/* =====================================================
+   MERGE — apply localStorage edits on top of base data
+   ===================================================== */
+function mergeProjects() {
+  const base = projects.map((p, i) => {
+    const ov = lsProjects.find(lp => lp._override === i);
+    return ov ? {...ov} : {...p};
+  });
+  return [...base, ...lsProjects.filter(p => p._local && !('_override' in p))];
+}
+function mergeStash() {
+  const base = stash.map((y, i) => {
+    const ov = lsStash.find(ly => ly._override === i);
+    return ov ? {...ov} : {...y};
+  });
+  return [...base, ...lsStash.filter(y => y._local && !('_override' in y))];
+}
+function mergeTutorials() {
+  const base = tutorials.map((t, i) => {
+    const ov = lsTutorials.find(lt => lt._override === i);
+    return ov ? {...ov} : {...t};
+  });
+  return [...base, ...lsTutorials.filter(t => t._local && !('_override' in t))];
+}
+
+/* Re-init merged arrays using merge functions */
+allProjects  = mergeProjects();
+allStash     = mergeStash();
+allTutorials = mergeTutorials();
+
+/* =====================================================
+   EDIT HANDLERS
+   ===================================================== */
+function openEditProject(idx) {
+  const p = allProjects[idx];
+  document.getElementById('ep-idx').value = idx;
+  document.getElementById('ep-name').value = p.name;
+  document.getElementById('ep-craft').value = p.craft;
+  document.getElementById('ep-status').value = p.status;
+  document.getElementById('ep-pattern').value = p.pattern || '';
+  document.getElementById('ep-yarn').value = p.yarn || '';
+  document.getElementById('ep-rating').value = p.rating || '';
+  document.getElementById('ep-notes').value = p.notes || '';
+  openModal('edit-project');
+}
+
+function updateProject() {
+  const idx = parseInt(document.getElementById('ep-idx').value);
+  const updated = {
+    name: document.getElementById('ep-name').value.trim(),
+    craft: document.getElementById('ep-craft').value,
+    status: document.getElementById('ep-status').value,
+    pattern: document.getElementById('ep-pattern').value.trim(),
+    yarn: document.getElementById('ep-yarn').value.trim(),
+    rating: parseInt(document.getElementById('ep-rating').value) || 0,
+    notes: document.getElementById('ep-notes').value.trim(),
+  };
+  if (idx < projects.length) {
+    updated._override = idx;
+    const ei = lsProjects.findIndex(p => p._override === idx);
+    if (ei >= 0) lsProjects[ei] = updated; else lsProjects.push(updated);
+  } else {
+    const lsIdx = idx - projects.length;
+    updated._local = true;
+    lsProjects[lsIdx] = updated;
+  }
+  saveLS('ss_projects', lsProjects);
+  allProjects = mergeProjects();
+  closeModal('edit-project');
+  renderProjects(); renderFuture();
+}
+
+function openEditYarn(idx) {
+  const y = allStash[idx];
+  document.getElementById('ey-idx').value = idx;
+  document.getElementById('ey-brand').value = y.brand;
+  document.getElementById('ey-name').value = y.name;
+  document.getElementById('ey-colorway').value = y.colorway;
+  document.getElementById('ey-color').value = y.color || '#cccccc';
+  document.getElementById('ey-yardage').value = y.yardage;
+  document.getElementById('ey-weight').value = y.weight;
+  document.getElementById('ey-fiber').value = y.fiber;
+  document.getElementById('ey-skeins').value = y.skeins;
+  document.getElementById('ey-store').value = y.store;
+  openModal('edit-stash');
+}
+
+function updateYarn() {
+  const idx = parseInt(document.getElementById('ey-idx').value);
+  const updated = {
+    brand: document.getElementById('ey-brand').value.trim(),
+    name: document.getElementById('ey-name').value.trim(),
+    colorway: document.getElementById('ey-colorway').value.trim(),
+    color: document.getElementById('ey-color').value,
+    yardage: document.getElementById('ey-yardage').value.trim(),
+    weight: document.getElementById('ey-weight').value,
+    fiber: document.getElementById('ey-fiber').value.trim(),
+    skeins: document.getElementById('ey-skeins').value.trim(),
+    store: document.getElementById('ey-store').value.trim(),
+  };
+  if (idx < stash.length) {
+    updated._override = idx;
+    const ei = lsStash.findIndex(y => y._override === idx);
+    if (ei >= 0) lsStash[ei] = updated; else lsStash.push(updated);
+  } else {
+    const lsIdx = idx - stash.length;
+    updated._local = true;
+    lsStash[lsIdx] = updated;
+  }
+  saveLS('ss_stash', lsStash);
+  allStash = mergeStash();
+  closeModal('edit-stash');
+  renderStash();
+}
+
+function openEditTutorial(idx) {
+  const t = allTutorials[idx];
+  document.getElementById('et-idx').value = idx;
+  document.getElementById('et-title').value = t.title;
+  document.getElementById('et-creator').value = t.creator;
+  document.getElementById('et-url').value = t.url;
+  document.getElementById('et-tag').value = t.tag;
+  openModal('edit-tutorial');
+}
+
+function updateTutorial() {
+  const idx = parseInt(document.getElementById('et-idx').value);
+  const updated = {
+    title: document.getElementById('et-title').value.trim(),
+    creator: document.getElementById('et-creator').value.trim(),
+    url: document.getElementById('et-url').value.trim(),
+    tag: document.getElementById('et-tag').value,
+  };
+  if (idx < tutorials.length) {
+    updated._override = idx;
+    const ei = lsTutorials.findIndex(t => t._override === idx);
+    if (ei >= 0) lsTutorials[ei] = updated; else lsTutorials.push(updated);
+  } else {
+    const lsIdx = idx - tutorials.length;
+    updated._local = true;
+    lsTutorials[lsIdx] = updated;
+  }
+  saveLS('ss_tutorials', lsTutorials);
+  allTutorials = mergeTutorials();
+  closeModal('edit-tutorial');
+  renderTutorials();
+}
+
+/* =====================================================
+   DELETE (localStorage entries only)
+   ===================================================== */
+function deleteProject(idx) {
+  if (!confirm('Delete this project?')) return;
+  lsProjects.splice(idx, 1);
+  saveLS('ss_projects', lsProjects);
+  allProjects = [...projects, ...lsProjects];
+  renderProjects(); renderFuture();
+}
+
+function deleteYarn(idx) {
+  if (!confirm('Delete this yarn?')) return;
+  lsStash.splice(idx, 1);
+  saveLS('ss_stash', lsStash);
+  allStash = [...stash, ...lsStash];
+  renderStash();
+}
+
+function deleteTutorial(idx) {
+  if (!confirm('Delete this tutorial?')) return;
+  lsTutorials.splice(idx, 1);
+  saveLS('ss_tutorials', lsTutorials);
+  allTutorials = [...tutorials, ...lsTutorials];
+  renderTutorials();
+}
+
+/* =====================================================
+   EXPORT CODE
+   ===================================================== */
+function openExport(type) {
+  let text = '';
+  const labels = { project:'projects', stash:'stash', tutorial:'tutorials', pattern:'patterns' };
+  document.getElementById('export-title').textContent = 'EXPORT ' + (labels[type]||type).toUpperCase();
+
+  if (type === 'project') {
+    text = 'const projects = [\n' + mergeProjects().map(p => {
+      const clean = {...p}; delete clean._local; delete clean._override; delete clean._idx;
+      return '  ' + JSON.stringify(clean);
+    }).join(',\n') + '\n];';
+  } else if (type === 'stash') {
+    text = 'const stash = [\n' + mergeStash().map(y => {
+      const clean = {...y}; delete clean._local; delete clean._override;
+      return '  ' + JSON.stringify(clean);
+    }).join(',\n') + '\n];';
+  } else if (type === 'tutorial') {
+    text = 'const tutorials = [\n' + mergeTutorials().map(t => {
+      const clean = {...t}; delete clean._local; delete clean._override; delete clean._idx;
+      return '  ' + JSON.stringify(clean);
+    }).join(',\n') + '\n];';
+  } else if (type === 'pattern') {
+    const all = [...lsPatterns];
+    text = '/* Add these to your projects array or pattern list:\n' +
+      all.map(p => `   Pattern: "${p.pattern}"${p.url ? ' → ' + p.url : ''}`).join('\n') + '\n*/';
+  }
+
+  document.getElementById('export-output').value = text;
+  openModal('export');
+}
+
+function copyExport() {
+  const ta = document.getElementById('export-output');
+  ta.select();
+  navigator.clipboard.writeText(ta.value).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'COPIED! ✦';
+    setTimeout(() => btn.textContent = 'COPY TO CLIPBOARD ▶', 2000);
+  });
+}
+
+/* =====================================================
+   INIT ===== */
 buildStars();
 buildFloaters();
 renderProjects();
