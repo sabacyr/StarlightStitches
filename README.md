@@ -1,108 +1,153 @@
-# 🧶 Yarn Quest — My Knitting & Crochet HQ
-
-A cutesy pixel-game-aesthetic website for tracking knitting and crochet projects, hosting PDF patterns, and managing your yarn stash. Built for GitHub Pages!
-
+# 🌙 Starlight Stitches
+### Saba's Knitting & Crochet Compendium
+ 
+A Sailor Moon-inspired pixel art website for tracking knitting and crochet projects, browsing patterns, managing your yarn stash, and accessing craft tools — all in one place. Built for GitHub Pages.
+ 
 ---
-
-## 📁 Recommended Repo Structure
-
+ 
+## 📁 Repo Structure
+ 
 ```
 your-repo/
-├── index.html          ← Main site (this file)
-├── Knit/               ← Put all your knitting PDF patterns here
-│   ├── Goyo-Balaclava.pdf
-│   ├── Arctic-Holly-Sweater.pdf
+├── index.html                          ← The entire site (one file!)
+├── README.md                           ← This file
+├── Starlight Stitches Night Mode.png   ← Hero art (night)
+├── Starlight Stitches Day Mode.png     ← Hero art (day)
+├── Bear Knit.png                       ← Bear the knit guardian
+├── Rosie Crochet.png                   ← Rosie the crochet guardian
+├── Mimi Stash.png                      ← Mimi the stash guardian
+├── Knit/                               ← Your knitting PDF patterns
+│   ├── pattern-name.pdf
 │   └── ...
-├── Crochet/            ← Put all your crochet PDF patterns here
-│   ├── Hexagon-Cardigan.pdf
-│   ├── Fox-Amigurumi.pdf
+├── Crochet/                            ← Your crochet PDF patterns
+│   ├── pattern-name.pdf
 │   └── ...
-└── README.md
+└── photos/                             ← Your finished object photos
+    ├── project-name.jpg
+    └── ...
 ```
-
+ 
 ---
-
+ 
 ## 🚀 GitHub Pages Setup
-
-1. Push this repo to GitHub
+ 
+1. Push all files to a GitHub repository
 2. Go to **Settings → Pages**
-3. Under "Source", select **Deploy from a branch**
+3. Under **Source**, select **Deploy from a branch**
 4. Choose **main** branch, **/ (root)** folder
 5. Click **Save**
-6. Your site will be live at `https://yourusername.github.io/your-repo/` in a minute or two!
-
+6. Your site will be live at `https://yourusername.github.io/repo-name/` within a minute or two
 ---
-
-## 🪡 Linking to Your PDF Patterns
-
-Once your PDFs are in the `Knit/` or `Crochet/` folders, you can link to them directly:
-
-```
-https://yourusername.github.io/your-repo/Knit/Goyo-Balaclava.pdf
-https://yourusername.github.io/your-repo/Crochet/Hexagon-Cardigan.pdf
-```
-
-To add clickable links in the project cards, find the project in the `projects` array inside `index.html` and add a `patternUrl` field:
-
-```js
-{
-  name: "Purple Rain Balaclava",
-  craft: "knit",
-  pattern: "Sijin Lee - Goyo Balaclava",
-  patternUrl: "Knit/Goyo-Balaclava.pdf",   // ← add this
-  yarn: "Mother Nature's Unicorn",
-  status: "finished",
-  rating: "5/5",
-  notes: "Good pattern but I was bored kinda..."
-}
-```
-
----
-
-## ✏️ Updating Your Projects
-
-All your project data lives in the `projects` array near the bottom of `index.html`. Each entry looks like:
-
+ 
+## ✏️ How to Edit Content
+ 
+All content lives inside the `<script>` section near the bottom of `index.html`. Look for the clearly labelled arrays.
+ 
+### Adding / Editing Projects
+ 
+Find the `projects` array and add or edit entries:
+ 
 ```js
 {
   name: "Project Name",
-  craft: "knit",         // "knit" or "crochet"
+  craft: "knit",          // "knit" or "crochet"
   pattern: "Designer - Pattern Name",
   yarn: "Brand Yarn Name",
-  status: "finished",    // "finished", "wip", "frogged", "trashed", "future"
-  rating: "5/5",
+  status: "finished",     // "finished", "wip", "frogged", "trashed", "future"
+  rating: 5,              // 1–5, or 0 for no rating
   notes: "Your notes here!"
 }
 ```
-
----
-
-## 🧶 Updating Your Stash
-
-The stash data is in the `stash` array. Each entry:
-
+ 
+### Adding / Editing Yarn Stash
+ 
+Find the `stash` array:
+ 
 ```js
 {
-  brand: "Cascade",
-  name: "Eco Duo",
-  colorway: "Chinchilla",
-  yardage: "197/100",
+  brand: "Lion Brand",
+  name: "24/7 Cotton",
+  colorway: "Red",
+  yardage: "186/100",
   weight: "Worsted (4)",
-  fiber: "Alpaca + M Wool",
-  skeins: "0/6",
-  store: "Misty Acres Farm"
+  fiber: "Cotton",
+  skeins: "2/2",
+  store: "Joann",
+  color: "#CC3030"        // hex colour for the little swatch dot
 }
 ```
-
+ 
+### Adding Tutorials
+ 
+Find the `tutorials` array and fill in the placeholder titles and creators:
+ 
+```js
+{
+  title: "Your Video Title Here",
+  creator: "Channel Name",
+  tag: "knit",            // "knit", "crochet", or "general"
+  url: "https://www.youtube.com/watch?v=..."
+}
+```
+ 
+Thumbnails are pulled automatically from YouTube — no extra files needed!
+ 
+### Adding Gallery Photos
+ 
+1. Create a `photos/` folder in your repo
+2. Upload your finished object images (jpg, png, webp)
+3. Find the `galleryPhotos` array in `index.html` and add entries:
+```js
+{
+  src: "photos/fox-plushie.jpg",
+  title: "Fox Plushie",
+  tag: "crochet"           // "knit" or "crochet"
+}
+```
+ 
+### Linking PDF Patterns
+ 
+Place PDFs in the `Knit/` or `Crochet/` folder. To make a pattern in the Pattern Vault clickable, add a `patternUrl` field to the matching project in the `projects` array:
+ 
+```js
+{
+  name: "Purple Rain Balaclava",
+  patternUrl: "Knit/Goyo-Balaclava.pdf",
+  ...
+}
+```
+ 
 ---
-
-## 🎨 Customization Tips
-
-- **Change your crafter name**: Search for `CRAFTY GOBLIN` and replace it with your own!
-- **Add your cats' names**: The footer has a cat emoji section — make it yours!
-- **Colors**: All colors are CSS variables at the top of the `<style>` block — easy to tweak.
-- **Site title**: Change `YARN QUEST` in the `<title>` tag and `.site-title` heading.
-
+ 
+## 🎨 Tabs Overview
+ 
+| Tab | What's in it |
+|---|---|
+| **Home** | Hero art, stats, quick navigation |
+| **Project Log** | All projects with search & filters |
+| **Pattern Vault** | Searchable list of all referenced patterns |
+| **Yarn Stash** | Full yarn inventory table |
+| **Quest Board** | Future / queued projects |
+| **Gallery** | Finished object photo grid |
+| **Tools** | Gauge calc, row counter, needle converter & more |
+| **Tutorials** | Clickable YouTube tutorial cards with search |
+ 
 ---
-
-*Made with love, yarn, and pixel art vibes* 🐱
+ 
+## 🐱 Cat Guardians
+ 
+| Cat | Page | Role |
+|---|---|---|
+| Bear | Project Log | Knit Guardian 🩶 |
+| Rosie | Pattern Vault | Crochet Guardian 🤎 |
+| Mimi | Yarn Stash | Stash Guardian 🧡 |
+ 
+---
+ 
+## 🌙 Day / Night Mode
+ 
+Click the toggle in the top-right corner of the nav bar to switch between night mode (deep midnight purple) and day mode (soft blush & champagne). The hero artwork swaps automatically.
+ 
+---
+ 
+*Made by Saba Cyr with Claude AI ✦*
