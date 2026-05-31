@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Starlight Stitches</title>
+<title>🌙 Starlight Stitches</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -1181,6 +1181,46 @@ body {
 /* =====================================================
    ADD ENTRY MODAL & ACTION BUTTONS
    ===================================================== */
+/* =====================================================
+   EDIT MODE TOOLBAR
+   ===================================================== */
+.edit-mode-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.em-toggle {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 11px 20px;
+  border: 2px solid var(--border-main);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.em-toggle:hover { border-color: var(--rose); color: var(--rose); }
+.em-toggle.active {
+  background: var(--rose-deep);
+  border-color: var(--rose-deep);
+  color: white;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+}
+
+/* Action buttons — only visible in edit mode */
+.em-actions {
+  display: none;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.edit-mode .em-actions { display: flex; }
+
 .add-btn {
   font-family: 'Press Start 2P', monospace;
   font-size: 8px;
@@ -1192,8 +1232,6 @@ body {
   letter-spacing: 0.5px;
   border-radius: 2px;
   transition: all 0.15s;
-  margin-bottom: 20px;
-  margin-right: 10px;
 }
 .add-btn:hover { background: var(--cosmic); border-color: var(--cosmic); transform: translate(-1px,-1px); box-shadow: 3px 3px 0 rgba(0,0,0,0.3); }
 
@@ -1208,10 +1246,123 @@ body {
   letter-spacing: 0.5px;
   border-radius: 2px;
   transition: all 0.15s;
-  margin-bottom: 20px;
 }
 .export-btn:hover { border-color: var(--gold); color: var(--gold); transform: translate(-1px,-1px); box-shadow: 3px 3px 0 rgba(0,0,0,0.3); }
 
+/* Card overlays in edit mode */
+.project-card { position: relative; }
+
+.card-edit-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-direction: column;
+  border-radius: 2px;
+}
+.edit-mode .project-card:hover .card-edit-overlay { display: flex; }
+.edit-mode .project-card { cursor: pointer; }
+
+/* Drag handle */
+.drag-handle {
+  display: none;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,0.6);
+  cursor: grab;
+  z-index: 11;
+  padding: 4px;
+  user-select: none;
+}
+.edit-mode .drag-handle { display: block; }
+.project-card.dragging { opacity: 0.4; border: 2px dashed var(--rose); }
+.project-card.drag-over { border-color: var(--gold); transform: scale(1.02); }
+
+/* Inline card action buttons */
+.card-action-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  padding: 8px 14px;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.card-action-btn.edit-card { border-color: var(--gold); color: var(--gold); }
+.card-action-btn.edit-card:hover { background: var(--gold); color: var(--bg-base); }
+.card-action-btn.del-card { border-color: #ff6060; color: #ff6060; }
+.card-action-btn.del-card:hover { background: #ff6060; color: white; }
+
+/* Table row edit mode */
+.stash-table tr.edit-mode-row td { cursor: pointer; }
+.stash-table tr.edit-mode-row:hover td { background: var(--rose-pale) !important; }
+.row-action-cell { white-space: nowrap; }
+.row-action-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  padding: 5px 8px;
+  border-radius: 2px;
+  cursor: pointer;
+  border: 1.5px solid;
+  background: transparent;
+  transition: all 0.15s;
+  margin-right: 4px;
+}
+.row-action-btn.edit { color: var(--gold); border-color: var(--gold); }
+.row-action-btn.edit:hover { background: var(--gold); color: var(--bg-base); }
+.row-action-btn.del { color: #ff6060; border-color: #ff6060; }
+.row-action-btn.del:hover { background: #ff6060; color: white; }
+
+/* Tutorial card edit overlay */
+.tutorial-card { position: relative; overflow: hidden; }
+.tutorial-edit-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.tutorials-grid.edit-mode .tutorial-card:hover .tutorial-edit-overlay { display: flex; }
+.tutorials-grid.edit-mode .tutorial-card { cursor: pointer; }
+
+/* Pattern list edit mode */
+.pattern-item { position: relative; }
+.pattern-item .row-action-btn { display: none; margin-left: 8px; }
+.pattern-list-cols.edit-mode .pattern-item .row-action-btn { display: inline-block; }
+.pattern-list-cols.edit-mode .pattern-item { cursor: pointer; }
+
+/* Gallery edit mode */
+.gallery-placeholder.edit-mode-item { position: relative; }
+
+/* Edit mode hint bar */
+.edit-hint {
+  display: none;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--gold);
+  padding: 8px 14px;
+  border: 1px solid var(--gold);
+  border-radius: 2px;
+  background: rgba(245,208,96,0.08);
+  margin-bottom: 16px;
+}
+.edit-mode-active .edit-hint { display: block; }
+
+/* delete-btn kept for legacy modal use */
 .delete-btn {
   font-family: 'Press Start 2P', monospace;
   font-size: 6px;
@@ -1677,10 +1828,14 @@ body {
       <button class="search-btn">SEARCH</button>
     </div>
 
-    <div style="display:flex;flex-wrap:wrap;align-items:center;">
-      <button class="add-btn" onclick="openModal('project')">+ ADD PROJECT</button>
-      <button class="export-btn" onclick="openExport('project')">↓ EXPORT CODE</button>
+    <div class="edit-mode-bar" id="em-bar-projects">
+      <button class="em-toggle" id="em-toggle-projects" onclick="toggleEditMode('projects')">✏️ EDIT MODE</button>
+      <div class="em-actions">
+        <button class="add-btn" onclick="openModal('project')">+ ADD PROJECT</button>
+        <button class="export-btn" onclick="openExport('project')">↓ EXPORT CODE</button>
+      </div>
     </div>
+    <div class="edit-hint" id="hint-projects">Hover a card to Edit or Delete it. Drag the ≡ handle to reorder.</div>
 
     <div class="filter-row">
       <button class="filter-btn active" onclick="setFilter('all',this)">ALL</button>
@@ -1740,10 +1895,14 @@ body {
       <button class="search-btn">SEARCH</button>
     </div>
 
-    <div style="display:flex;flex-wrap:wrap;align-items:center;">
-      <button class="add-btn" onclick="openModal('pattern')">+ ADD PATTERN</button>
-      <button class="export-btn" onclick="openExport('pattern')">↓ EXPORT CODE</button>
+    <div class="edit-mode-bar" id="em-bar-patterns">
+      <button class="em-toggle" id="em-toggle-patterns" onclick="toggleEditMode('patterns')">✏️ EDIT MODE</button>
+      <div class="em-actions">
+        <button class="add-btn" onclick="openModal('pattern')">+ ADD PATTERN</button>
+        <button class="export-btn" onclick="openExport('pattern')">↓ EXPORT CODE</button>
+      </div>
     </div>
+    <div class="edit-hint" id="hint-patterns">Click a pattern to delete it from the list.</div>
 
     <div class="pattern-list-card">
       <div class="pattern-list-head">✦ PATTERNS REFERENCED IN PROJECTS</div>
@@ -1778,10 +1937,14 @@ body {
         <span class="cat-speech">"Every skein, every gram — I know what's in the stash. Do NOT buy more yarn. (She lies.)"</span>
       </div>
     </div>
-    <div style="display:flex;flex-wrap:wrap;align-items:center;">
-      <button class="add-btn" onclick="openModal('stash')">+ ADD YARN</button>
-      <button class="export-btn" onclick="openExport('stash')">↓ EXPORT CODE</button>
+    <div class="edit-mode-bar" id="em-bar-stash">
+      <button class="em-toggle" id="em-toggle-stash" onclick="toggleEditMode('stash')">✏️ EDIT MODE</button>
+      <div class="em-actions">
+        <button class="add-btn" onclick="openModal('stash')">+ ADD YARN</button>
+        <button class="export-btn" onclick="openExport('stash')">↓ EXPORT CODE</button>
+      </div>
     </div>
+    <div class="edit-hint" id="hint-stash">Click ✏️ to edit a yarn entry or ✕ to delete it.</div>
     <div class="stash-wrap">
       <div class="stash-scroll">
         <table class="stash-table">
@@ -1816,6 +1979,14 @@ body {
       <div class="section-title">🌟 QUEST BOARD</div>
       <div class="section-line"></div>
     </div>
+    <div class="edit-mode-bar" id="em-bar-quest">
+      <button class="em-toggle" id="em-toggle-quest" onclick="toggleEditMode('quest')">✏️ EDIT MODE</button>
+      <div class="em-actions">
+        <button class="add-btn" onclick="openQuestModal()">+ ADD TO QUEST BOARD</button>
+        <button class="export-btn" onclick="openExport('project')">↓ EXPORT CODE</button>
+      </div>
+    </div>
+    <div class="edit-hint" id="hint-quest">Hover a card to Edit or Delete it. Drag the ≡ handle to reorder.</div>
     <div class="projects-grid" id="future-grid"></div>
   </div>
 
@@ -1847,6 +2018,14 @@ body {
            { src:"photos/fox-plushie.jpg", title:"Fox Plushie", tag:"crochet" }
       Photos will appear in the grid automatically!
     -->
+
+    <div class="edit-mode-bar" id="em-bar-gallery">
+      <button class="em-toggle" id="em-toggle-gallery" onclick="toggleEditMode('gallery')">✏️ EDIT MODE</button>
+      <div class="em-actions">
+        <button class="export-btn" onclick="openExport('gallery')">↓ EXPORT CODE</button>
+      </div>
+    </div>
+    <div class="edit-hint" id="hint-gallery">Hover a photo to delete it. Add photos via the galleryPhotos array in the code.</div>
 
     <div class="gallery-grid" id="gallery-grid">
       <!-- Populated by JS — placeholders shown when no photos added -->
@@ -2204,10 +2383,14 @@ body {
       <button class="search-btn">SEARCH</button>
     </div>
 
-    <div style="display:flex;flex-wrap:wrap;align-items:center;">
-      <button class="add-btn" onclick="openModal('tutorial')">+ ADD TUTORIAL</button>
-      <button class="export-btn" onclick="openExport('tutorial')">↓ EXPORT CODE</button>
+    <div class="edit-mode-bar" id="em-bar-tutorials">
+      <button class="em-toggle" id="em-toggle-tutorials" onclick="toggleEditMode('tutorials')">✏️ EDIT MODE</button>
+      <div class="em-actions">
+        <button class="add-btn" onclick="openModal('tutorial')">+ ADD TUTORIAL</button>
+        <button class="export-btn" onclick="openExport('tutorial')">↓ EXPORT CODE</button>
+      </div>
     </div>
+    <div class="edit-hint" id="hint-tutorials">Hover a card to Edit or Delete it. Drag the ≡ handle to reorder.</div>
 
     <div class="tutorials-grid" id="tutorials-grid"></div>
   </div>
@@ -2692,30 +2875,31 @@ function getYouTubeId(url) {
 function renderTutorials() {
   const q = (document.getElementById('tutorialSearch')?.value || '').toLowerCase();
   const grid = document.getElementById('tutorials-grid');
+  const isEdit = document.getElementById('em-toggle-tutorials')?.classList.contains('active');
   const list = allTutorials.map((t,i)=>({...t,_idx:i})).filter(t => !q || t.title.toLowerCase().includes(q) || t.creator.toLowerCase().includes(q) || t.tag.includes(q));
   if (!list.length) {
     grid.innerHTML = `<div class="empty-state">NO TUTORIALS FOUND ✦</div>`;
     return;
   }
+  if (isEdit) grid.classList.add('edit-mode'); else grid.classList.remove('edit-mode');
   grid.innerHTML = list.map(t => {
     const vid = getYouTubeId(t.url);
     const thumb = vid ? `<img class="tutorial-thumb" src="https://img.youtube.com/vi/${vid}/mqdefault.jpg" alt="${t.title}" loading="lazy">` : `<div class="tutorial-thumb-placeholder">🎬</div>`;
-    const lsIdx = (t._local && !('_override' in t)) ? lsTutorials.findIndex(lt => lt === allTutorials[t._idx]) : -1;
-    const delBtn = lsIdx >= 0 ? `<button class="delete-btn" onclick="event.preventDefault();deleteTutorial(${lsIdx})">✕ REMOVE</button>` : '';
     return `
       <div class="tutorial-card" style="cursor:default;">
-        <a href="${t.url}" target="_blank" rel="noopener" style="display:block;text-decoration:none;">${thumb}</a>
+        <div class="tutorial-edit-overlay">
+          <button class="card-action-btn edit-card" onclick="openEditTutorial(${t._idx})">✏️ EDIT</button>
+          <button class="card-action-btn del-card" onclick="deleteTutorial(${t._idx})">✕ DELETE</button>
+        </div>
+        <a href="${t.url}" target="_blank" rel="noopener" style="display:block;text-decoration:none;" onclick="if(document.getElementById('tutorials-grid').classList.contains('edit-mode'))return false;">${thumb}</a>
         <div class="tutorial-info">
           <span class="tutorial-title">${t.title}</span>
           <span class="tutorial-creator">${t.creator}</span>
           <span class="tutorial-tag ${t.tag}">${t.tag.toUpperCase()}</span>
-          <div style="display:flex;gap:6px;margin-top:8px;">
-            <button class="delete-btn" style="margin:0;" onclick="openEditTutorial(${t._idx})">✏️ EDIT</button>
-            ${delBtn}
-          </div>
         </div>
       </div>`;
   }).join('');
+  initDrag('tutorials-grid', 'tutorials');
 }
 
 /* ===== TAB NAVIGATION ===== */
@@ -2791,11 +2975,13 @@ function renderProjects() {
     grid.innerHTML=`<div class="empty-state">NO PROJECTS FOUND...<br>THE MOON WILL GUIDE YOU ✦</div>`;
     return;
   }
-  grid.innerHTML = list.map(p => {
-    const lsIdx = p._local ? lsProjects.findIndex(lp => lp === allProjects[p._idx]) : -1;
-    const delBtn = (p._local && lsIdx >= 0) ? `<button class="delete-btn" onclick="deleteProject(${lsIdx})">✕ REMOVE</button>` : '';
-    return `
-    <div class="project-card" data-status="${p.status}">
+  grid.innerHTML = list.map(p => `
+    <div class="project-card" data-status="${p.status}" data-idx="${p._idx}" draggable="false">
+      <div class="drag-handle" title="Drag to reorder">≡</div>
+      <div class="card-edit-overlay">
+        <button class="card-action-btn edit-card" onclick="event.stopPropagation();openEditProject(${p._idx})">✏️ EDIT</button>
+        <button class="card-action-btn del-card" onclick="event.stopPropagation();deleteProject(${p._idx})">✕ DELETE</button>
+      </div>
       <div class="project-card-bar"></div>
       <div class="project-card-head">
         <span class="project-name">${p.name}</span>
@@ -2809,12 +2995,9 @@ function renderProjects() {
           ${p.rating?`<span class="stars-row">${stars(p.rating)}</span>`:''}
         </div>
         ${p.notes?`<div class="project-notes">${p.notes}</div>`:''}
-        <div style="display:flex;gap:6px;margin-top:8px;">
-          <button class="delete-btn" style="margin:0;" onclick="openEditProject(${p._idx})">✏️ EDIT</button>
-          ${delBtn}
-        </div>
       </div>
-    </div>`}).join('');
+    </div>`).join('');
+  initDrag('projects-grid', 'projects');
 }
 
 function renderFuture() {
@@ -2822,7 +3005,12 @@ function renderFuture() {
     .map((p, i) => ({...p, _idx: i}))
     .filter(p=>p.status==='future')
     .map(p=>`
-      <div class="project-card" data-status="future">
+      <div class="project-card" data-status="future" data-idx="${p._idx}" draggable="false">
+        <div class="drag-handle" title="Drag to reorder">≡</div>
+        <div class="card-edit-overlay">
+          <button class="card-action-btn edit-card" onclick="event.stopPropagation();openEditProject(${p._idx})">✏️ EDIT</button>
+          <button class="card-action-btn del-card" onclick="event.stopPropagation();deleteProject(${p._idx})">✕ DELETE</button>
+        </div>
         <div class="project-card-bar"></div>
         <div class="project-card-head">
           <span class="project-name">${p.name}</span>
@@ -2832,17 +3020,15 @@ function renderFuture() {
           <div class="project-meta-row"><span class="meta-key">PATTERN</span>&nbsp;<span style="font-family:Nunito;font-size:13px;color:var(--text-primary)">${p.pattern||'TBD'}</span></div>
           <div class="project-meta-row"><span class="meta-key">YARN</span>&nbsp;<span style="font-family:Nunito;font-size:13px;color:var(--text-primary)">${p.yarn||'TBD'}</span></div>
           <div class="project-footer"><span class="status-badge status-future">🌟 ON THE QUEST BOARD</span></div>
-          <button class="delete-btn" style="margin-top:8px;" onclick="openEditProject(${p._idx})">✏️ EDIT</button>
         </div>
       </div>`).join('');
+  initDrag('future-grid', 'quest');
 }
 
 function renderStash() {
-  document.getElementById('stash-tbody').innerHTML = allStash.map((y, idx)=>{
-    const lsIdx = (y._local && !('_override' in y)) ? lsStash.findIndex(ly => ly === allStash[idx]) : -1;
-    const delCell = lsIdx >= 0 ? `<td><button class="delete-btn" style="margin:0;" onclick="deleteYarn(${lsIdx})">✕</button></td>` : '<td></td>';
-    return `
-    <tr>
+  const isEdit = document.getElementById('em-toggle-stash')?.classList.contains('active');
+  document.getElementById('stash-tbody').innerHTML = allStash.map((y, idx)=>`
+    <tr class="${isEdit ? 'edit-mode-row' : ''}">
       <td><strong>${y.brand}</strong></td>
       <td>${y.name}</td>
       <td><span class="swatch" style="background:${y.color};"></span>${y.colorway}</td>
@@ -2851,22 +3037,29 @@ function renderStash() {
       <td>${y.fiber}</td>
       <td>${y.skeins}</td>
       <td>${y.store}</td>
-      <td><button class="delete-btn" style="margin:0;" onclick="openEditYarn(${idx})">✏️</button></td>
-      ${delCell}
-    </tr>`;
-  }).join('');
+      <td class="row-action-cell" style="display:${isEdit?'table-cell':'none'}">
+        <button class="row-action-btn edit" onclick="openEditYarn(${idx})">✏️ EDIT</button>
+        <button class="row-action-btn del" onclick="deleteYarn(${idx})">✕ DEL</button>
+      </td>
+    </tr>`).join('');
 }
 
 function renderPatterns() { filterPatterns(); }
 
 function filterPatterns() {
   const q = (document.getElementById('patternSearch')?.value || '').toLowerCase();
+  const isEdit = document.getElementById('em-toggle-patterns')?.classList.contains('active');
   const fromProjects = [...new Set(
     allProjects.filter(p=>p.pattern&&!p.pattern.toLowerCase().startsWith('my')&&p.pattern!=='TBD'&&p.pattern!=='My own'&&p.pattern!=='15 by 18 inches'&&p.pattern!=='—').map(p=>p.pattern)
   )];
   const fromLocal = lsPatterns.map(p => p.pattern);
-  const all = [...new Set([...fromProjects, ...fromLocal])].sort().filter(p => !q || p.toLowerCase().includes(q));
-  document.getElementById('pattern-list').innerHTML = all.map(p=>`<div class="pattern-item">${p}</div>`).join('')
+  const hidden = loadLS('ss_hidden_patterns');
+  const all = [...new Set([...fromProjects, ...fromLocal])].sort().filter(p => !q || p.toLowerCase().includes(q)).filter(p => !hidden.includes(p));
+  document.getElementById('pattern-list').innerHTML = all.map(p=>`
+    <div class="pattern-item">
+      ${p}
+      ${isEdit ? `<button class="row-action-btn del" style="font-size:5px;padding:3px 6px;" onclick="deletePattern('${p.replace(/'/g,"\\'")}')">✕</button>` : ''}
+    </div>`).join('')
     || `<div style="font-family:'Press Start 2P',monospace;font-size:7px;color:var(--text-muted);padding:12px 0;">NO PATTERNS FOUND</div>`;
 }
 
@@ -3187,6 +3380,12 @@ function savePattern() {
   filterPatterns();
 }
 
+function openQuestModal() {
+  openModal('project');
+  /* Pre-select Future / Queued status */
+  document.getElementById('p-status').value = 'future';
+}
+
 function saveProject() {
   const name = document.getElementById('p-name').value.trim();
   if (!name) { alert('Please enter a project name!'); return; }
@@ -3261,22 +3460,25 @@ function clearForm(ids) {
 function mergeProjects() {
   const base = projects.map((p, i) => {
     const ov = lsProjects.find(lp => lp._override === i);
+    if (ov?._deleted) return null;
     return ov ? {...ov} : {...p};
-  });
+  }).filter(Boolean);
   return [...base, ...lsProjects.filter(p => p._local && !('_override' in p))];
 }
 function mergeStash() {
   const base = stash.map((y, i) => {
     const ov = lsStash.find(ly => ly._override === i);
+    if (ov?._deleted) return null;
     return ov ? {...ov} : {...y};
-  });
+  }).filter(Boolean);
   return [...base, ...lsStash.filter(y => y._local && !('_override' in y))];
 }
 function mergeTutorials() {
   const base = tutorials.map((t, i) => {
     const ov = lsTutorials.find(lt => lt._override === i);
+    if (ov?._deleted) return null;
     return ov ? {...ov} : {...t};
-  });
+  }).filter(Boolean);
   return [...base, ...lsTutorials.filter(t => t._local && !('_override' in t))];
 }
 
@@ -3407,26 +3609,51 @@ function updateTutorial() {
    DELETE (localStorage entries only)
    ===================================================== */
 function deleteProject(idx) {
-  if (!confirm('Delete this project?')) return;
-  lsProjects.splice(idx, 1);
+  const p = allProjects[idx];
+  if (!confirm(`Delete "${p.name}"? This cannot be undone unless you re-upload your index.html.`)) return;
+  if (idx < projects.length) {
+    /* Base entry — mark as deleted in localStorage */
+    const existing = lsProjects.findIndex(lp => lp._override === idx);
+    if (existing >= 0) lsProjects[existing]._deleted = true;
+    else lsProjects.push({ _override: idx, _deleted: true });
+  } else {
+    const lsIdx = lsProjects.findIndex(lp => lp._local && !('_override' in lp) && allProjects[idx] === lp);
+    if (lsIdx >= 0) lsProjects.splice(lsIdx, 1);
+  }
   saveLS('ss_projects', lsProjects);
-  allProjects = [...projects, ...lsProjects];
+  allProjects = mergeProjects();
   renderProjects(); renderFuture();
 }
 
 function deleteYarn(idx) {
-  if (!confirm('Delete this yarn?')) return;
-  lsStash.splice(idx, 1);
+  const y = allStash[idx];
+  if (!confirm(`Delete "${y.brand} ${y.name} — ${y.colorway}"?`)) return;
+  if (idx < stash.length) {
+    const existing = lsStash.findIndex(ly => ly._override === idx);
+    if (existing >= 0) lsStash[existing]._deleted = true;
+    else lsStash.push({ _override: idx, _deleted: true });
+  } else {
+    const lsIdx = lsStash.findIndex(ly => ly._local && !('_override' in ly) && allStash[idx] === ly);
+    if (lsIdx >= 0) lsStash.splice(lsIdx, 1);
+  }
   saveLS('ss_stash', lsStash);
-  allStash = [...stash, ...lsStash];
+  allStash = mergeStash();
   renderStash();
 }
 
 function deleteTutorial(idx) {
-  if (!confirm('Delete this tutorial?')) return;
-  lsTutorials.splice(idx, 1);
+  const t = allTutorials[idx];
+  if (!confirm(`Delete "${t.title}"?`)) return;
+  if (idx < tutorials.length) {
+    const existing = lsTutorials.findIndex(lt => lt._override === idx);
+    if (existing >= 0) lsTutorials[existing]._deleted = true;
+    else lsTutorials.push({ _override: idx, _deleted: true });
+  } else {
+    const lsIdx = lsTutorials.findIndex(lt => lt._local && !('_override' in lt) && allTutorials[idx] === lt);
+    if (lsIdx >= 0) lsTutorials.splice(lsIdx, 1);
+  }
   saveLS('ss_tutorials', lsTutorials);
-  allTutorials = [...tutorials, ...lsTutorials];
+  allTutorials = mergeTutorials();
   renderTutorials();
 }
 
@@ -3471,6 +3698,131 @@ function copyExport() {
     btn.textContent = 'COPIED! ✦';
     setTimeout(() => btn.textContent = 'COPY TO CLIPBOARD ▶', 2000);
   });
+}
+
+/* =====================================================
+   EDIT MODE
+   ===================================================== */
+const editModes = {};
+
+function toggleEditMode(tab) {
+  editModes[tab] = !editModes[tab];
+  const toggle = document.getElementById('em-toggle-' + tab);
+  const bar = document.getElementById('em-bar-' + tab);
+  const hint = document.getElementById('hint-' + tab);
+
+  if (editModes[tab]) {
+    toggle.classList.add('active');
+    toggle.textContent = '✓ DONE EDITING';
+    bar.classList.add('edit-mode');
+    if (hint) hint.parentElement.classList.add('edit-mode-active');
+  } else {
+    toggle.classList.remove('active');
+    toggle.textContent = '✏️ EDIT MODE';
+    bar.classList.remove('edit-mode');
+    if (hint) hint.parentElement.classList.remove('edit-mode-active');
+  }
+
+  /* Re-render the relevant section */
+  if (tab === 'projects') { renderProjects(); }
+  else if (tab === 'quest') { renderFuture(); }
+  else if (tab === 'stash') { renderStash(); }
+  else if (tab === 'patterns') { filterPatterns(); }
+  else if (tab === 'tutorials') { renderTutorials(); }
+  else if (tab === 'gallery') { renderGallery(); }
+
+  /* Apply edit-mode class to the grid for CSS hover overlays */
+  const gridMap = {
+    projects: 'projects-grid',
+    quest: 'future-grid',
+    tutorials: 'tutorials-grid',
+  };
+  if (gridMap[tab]) {
+    const grid = document.getElementById(gridMap[tab]);
+    if (grid) {
+      if (editModes[tab]) grid.classList.add('edit-mode');
+      else grid.classList.remove('edit-mode');
+    }
+  }
+}
+
+/* =====================================================
+   DRAG AND DROP REORDER
+   ===================================================== */
+function initDrag(gridId, tab) {
+  if (!editModes[tab]) return;
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+  const cards = [...grid.querySelectorAll('.project-card, .tutorial-card')];
+  let dragSrc = null;
+
+  cards.forEach(card => {
+    const handle = card.querySelector('.drag-handle');
+    if (handle) {
+      handle.addEventListener('mousedown', () => { card.draggable = true; });
+      handle.addEventListener('mouseup', () => { card.draggable = false; });
+    }
+
+    card.addEventListener('dragstart', e => {
+      dragSrc = card;
+      card.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+
+    card.addEventListener('dragend', () => {
+      card.classList.remove('dragging');
+      card.draggable = false;
+      grid.querySelectorAll('.drag-over').forEach(c => c.classList.remove('drag-over'));
+      saveReorder(gridId, tab);
+    });
+
+    card.addEventListener('dragover', e => {
+      e.preventDefault();
+      if (card !== dragSrc) {
+        grid.querySelectorAll('.drag-over').forEach(c => c.classList.remove('drag-over'));
+        card.classList.add('drag-over');
+        const afterEl = getDragAfterEl(grid, e.clientY);
+        if (afterEl) grid.insertBefore(dragSrc, afterEl);
+        else grid.appendChild(dragSrc);
+      }
+    });
+  });
+}
+
+function getDragAfterEl(grid, y) {
+  const els = [...grid.querySelectorAll('.project-card:not(.dragging), .tutorial-card:not(.dragging)')];
+  return els.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height / 2;
+    if (offset < 0 && offset > closest.offset) return { offset, element: child };
+    return closest;
+  }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+function saveReorder(gridId, tab) {
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+  const newOrder = [...grid.querySelectorAll('[data-idx]')].map(c => parseInt(c.dataset.idx));
+  saveLS('ss_order_' + tab, newOrder);
+}
+
+/* =====================================================
+   DELETE PATTERN (from pattern list)
+   ===================================================== */
+function deletePattern(name) {
+  if (!confirm(`Remove "${name}" from the pattern list?`)) return;
+  /* Remove from lsPatterns if it's a local addition */
+  const li = lsPatterns.findIndex(p => p.pattern === name);
+  if (li >= 0) {
+    lsPatterns.splice(li, 1);
+    saveLS('ss_patterns', lsPatterns);
+  } else {
+    /* It came from a project — mark as hidden */
+    const hidden = loadLS('ss_hidden_patterns');
+    hidden.push(name);
+    saveLS('ss_hidden_patterns', hidden);
+  }
+  filterPatterns();
 }
 
 /* =====================================================
